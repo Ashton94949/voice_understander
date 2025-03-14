@@ -7,11 +7,10 @@ app = Flask(__name__)
 
 @app.route('/voice-assistant', methods=['POST'])
 def voice_assistant():
-    audio_data = request.files['audio']
-    text = recognize_speech(audio_data)
+    text = recognize_speech()
     response = process_query(text)
-    audio_response = text_to_speech(response)
-    return jsonify({'response': response, 'audio': audio_response})
+    text_to_speech(response)
+    return jsonify({'response': response})
 
 if __name__ == '__main__':
     app.run(debug=True)
