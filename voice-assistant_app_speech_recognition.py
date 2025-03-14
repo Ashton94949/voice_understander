@@ -1,10 +1,11 @@
 import speech_recognition as sr
 
-def recognize_speech(audio_data):
+def recognize_speech():
     recognizer = sr.Recognizer()
     recognizer.energy_threshold = 300  # Adjust for noisy environments
-    with sr.AudioFile(audio_data) as source:
-        audio = recognizer.record(source)
+    with sr.Microphone() as source:
+        print("Listening...")
+        audio = recognizer.listen(source)
     try:
         text = recognizer.recognize_google(audio)
         return text
